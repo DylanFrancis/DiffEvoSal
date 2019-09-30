@@ -20,8 +20,8 @@ class Solution : Comparable<Solution>{
 
     override fun toString(): String {
         var s = ""
-        s = "$s error: $error"
-        weights.forEach { w ->  s = "$s $w" }
+        s = "$error"
+        weights.forEach { w ->  s = "$s;$w" }
         return s
     }
 }

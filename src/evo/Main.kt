@@ -1,28 +1,69 @@
 package evo
 
 import java.io.FileInputStream
-import kotlin.math.abs
+import java.io.FileOutputStream
+import java.lang.Math.pow
+import java.util.concurrent.ExecutorService
 import kotlin.random.Random
 import kotlin.streams.toList
 
 fun main(){
-    val p = SalPrediction(10000)
-    p.start()
+    Thread(Runnable { val p = SalPrediction(10000, 0.01, 0.4)
+        p.start() }).start()
+
+    Thread(Runnable { val p = SalPrediction(10000, 0.02, 0.4)
+        p.start() }).start()
+
+    Thread(Runnable { val p = SalPrediction(10000, 0.01, 0.8)
+        p.start() }).start()
+
+    Thread(Runnable { val p = SalPrediction(10000, 0.02, 0.8)
+        p.start() }).start()
 }
 
-class SalPrediction(val population_size : Int){
-    val data = readData()
-    var currentPopulation = initialisePopulation()
+class SalPrediction(val population_size : Int, val f : Double, val c : Double){
+    var trainingSet = listOf<Sample>()
+    var testSet = listOf<Sample>()
+    var currentPopulation = arrayListOf<Solution>()
     val newPopulation = arrayListOf<Solution>()
+    val time = System.currentTimeMillis()
 
-    var f = 0.000001    // scale factor
-    var c = 0.5         // crossover probability
+    init {
+        readData()
+        currentPopulation = initialisePopulation()
+    }
 
     fun start(){
-        for (i in 0..10000000) {
+        for (i in 0..15000) {
             mutate()
             evaluate()
-            println(currentPopulation.min())
+            save(i)
+        }
+        printGen()
+        printTest()
+    }
+
+    val toBePrinted = mutableListOf<String>()
+
+    fun save(generation : Int){
+        toBePrinted.add("$generation" +
+                ";${currentPopulation.stream().mapToDouble { t -> t.error }.average().asDouble}" +
+                ";${currentPopulation.min().toString()}\n")
+    }
+
+    fun printTest(){
+        FileOutputStream("./output_${population_size}_${f}_${c}_$time.csv", true).bufferedWriter().use { out ->
+            val best = testPop(currentPopulation.min()!!, testSet)
+            println(best)
+            out.write("test;${best.toString()}\n")
+            out.flush()
+        }
+    }
+
+    fun printGen (){
+        FileOutputStream("./output_${population_size}_${f}_${c}_$time.csv", true).bufferedWriter().use { out ->
+            toBePrinted.forEach({s -> out.write(s)})
+            out.flush()
         }
     }
 
@@ -52,7 +93,7 @@ class SalPrediction(val population_size : Int){
                 if (Random.nextDouble(0.0, 1.1) < c) u.weights[r] = newVectors[r]
                 else u.weights[r] = r1.weights[r]
             }
-            newPopulation.add(testPop(u))
+            newPopulation.add(testPop(u, trainingSet))
         }
     }
 
@@ -63,14 +104,14 @@ class SalPrediction(val population_size : Int){
         return r
     }
 
-    fun testPop(pop : Solution) : Solution {
+    fun testPop(pop : Solution, set : List<Sample>) : Solution {
         var error = 0.0
-        for (sample in data){
+        for (sample in set){
             var prediction = 0.0
             for (p in 0..6){
                 prediction += sample.parems[p + 1] * pop.weights[p]
             }
-            error += abs(prediction - sample.parems[0])
+            error += pow(sample.parems[0] - prediction, 2.0)
         }
         return Solution(pop.weights, error)
     }
@@ -81,13 +122,13 @@ class SalPrediction(val population_size : Int){
     fun initialisePopulation() : ArrayList<Solution>{
         fun getWeights() : DoubleArray{
             val arr = DoubleArray(7)
-            for (i in 0..6) arr[i] = Random.nextDouble(0.0, 100000.0)
+            for (i in 0..6) arr[i] = Random.nextDouble(0.0, 5000.0)
             return arr
         }
 
         val arr = arrayListOf<Solution>()
         for (i in 0..population_size){
-            arr.add(testPop(Solution(getWeights(), 0.0)))
+            arr.add(testPop(Solution(getWeights(), 0.0), trainingSet))
         }
         return arr
     }
@@ -95,10 +136,13 @@ class SalPrediction(val population_size : Int){
     /**
      * Reads data to be trained upon
      */
-    fun readData() : List<Sample>{
+    fun readData(){
+        var dataSet = listOf<Sample>()
         FileInputStream("./resources/SalData.csv").bufferedReader().use { input ->
-            return input.lines().map { i -> Sample(i.split(",")) }.toList()
+            dataSet = input.lines().map { i -> Sample(i.split(",")) }.toList()
         }
+        trainingSet = dataSet.subList(0, (dataSet.size * 0.7).toInt())
+        testSet     = dataSet.subList((dataSet.size * 0.7).toInt(), dataSet.size)
     }
 }
 

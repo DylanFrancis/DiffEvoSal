@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c3061ce9-ea20-4bb5-9c03-2125ccd12942" name="Default Changelist" comment="" />
+    <list default="true" id="c3061ce9-ea20-4bb5-9c03-2125ccd12942" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/output1569858972535.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output_10000_0.01_0.4_1569860588760.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output_10000_0.01_0.4_1569862092860.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output_10000_0.01_0.8_1569862092860.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output_10000_0.02_0.4_1569861230167.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output_10000_0.02_0.4_1569862092860.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output_10000_0.02_0.8_1569862092860.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DiffEvoSal/evo/MainKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DiffEvoSal/evo/MainKt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DiffEvoSal/evo/SalPrediction$initialisePopulation$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DiffEvoSal/evo/SalPrediction$initialisePopulation$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DiffEvoSal/evo/SalPrediction$readData$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DiffEvoSal/evo/SalPrediction$readData$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DiffEvoSal/evo/SalPrediction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DiffEvoSal/evo/SalPrediction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DiffEvoSal/evo/Sample$parems$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DiffEvoSal/evo/Sample$parems$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DiffEvoSal/evo/Sample.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DiffEvoSal/evo/Sample.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DiffEvoSal/evo/Solution.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DiffEvoSal/evo/Solution.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/evo/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/evo/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/evo/Solution.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/evo/Solution.kt" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +41,11 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1RQ6oWgOjVuo43Zoffj7nDsb6gM" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -84,16 +106,44 @@
       <workItem from="1569399853272" duration="1941000" />
       <workItem from="1569587152368" duration="6409000" />
       <workItem from="1569757067834" duration="10469000" />
+      <workItem from="1569824546929" duration="713000" />
+      <workItem from="1569856535558" duration="7596000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/evo/Main.kt</url>
+          <line>36</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="JetRunConfigurationType">
         <watch expression="pop" />
+        <watch expression="((SalPrediction)this).trainingSet" custom="evo.SalPrediction" />
       </configuration>
     </watches-manager>
   </component>
